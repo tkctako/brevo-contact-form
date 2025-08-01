@@ -13,7 +13,7 @@ export async function POST(req) {
   })
   console.log(process.env.BREVO_USER, process.env.BREVO_API_KEY)
   const adminMail = {
-    from: `"Website Form" <${process.env.BREVO_USER}>`,
+    from: `"Website Form" <${process.env.ADMIN_EMAIL}>`,
     to: process.env.ADMIN_EMAIL, // 管理者
     subject: `New message from ${name}`,
     html: `
@@ -24,7 +24,7 @@ export async function POST(req) {
   }
 
   const userMail = {
-    from: `"Your Website" <${process.env.BREVO_USER}>`,
+    from: `"Your Website" <${process.env.ADMIN_EMAIL}>`,
     to: email, // 寄給使用者
     subject: 'Thanks for contacting us!',
     html: `<p>Hi ${name},<br/>Thanks for reaching out. We'll get back to you soon.</p>`,
