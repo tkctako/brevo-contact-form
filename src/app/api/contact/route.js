@@ -25,10 +25,42 @@ export async function POST(req) {
 
   const userMail = {
     from: `"Your Website" <${process.env.ADMIN_EMAIL}>`,
-    to: email, // 寄給使用者
+    to: email, // 使用者 Email
     subject: 'Thanks for contacting us!',
-    html: `<p>Hi ${name},<br/>Thanks for reaching out. We'll get back to you soon.</p>`,
-  }
+    html: `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8" />
+        <title>Thanks for contacting us</title>
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+          }
+          .footer {
+            font-size: 12px;
+            color: #888;
+            margin-top: 30px;
+          }
+        </style>
+      </head>
+      <body>
+        <h2>Hello ${name || 'there'},</h2>
+        <p>Thanks for reaching out to us. We’ve received your message and will get back to you as soon as possible.</p>
+        <p>In the meantime, feel free to browse our <a href="https://yourwebsite.com">website</a>.</p>
+        <p>Best regards,<br />Your Website Team</p>
+  
+        <div class="footer">
+          This is an automated email, please do not reply directly to this address.
+        </div>
+      </body>
+    </html>
+    `,
+  };
+  
 
   try {
     console.log('Sending admin email to:', process.env.ADMIN_EMAIL)
